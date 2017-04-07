@@ -30,4 +30,16 @@ class ImageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func configureCell(article: Article) {
+
+        if let title = article.title {
+            labelTitle.text = title
+        }
+
+        if let imageData = article.imageData {
+
+        }
+
+    }
+
 }

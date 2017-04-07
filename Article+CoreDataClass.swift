@@ -9,12 +9,11 @@
 import Foundation
 import CoreData
 
-
 public class Article: NSManagedObject {
 
     public override func awakeFromInsert() {
         super.awakeFromInsert()
-        
+
         self.createdDate = NSDate()
     }
 }

@@ -17,7 +17,7 @@ func addCoreDataArticle(content: String?, title: String?, imageData: NSData?) {
 
     let moc = appDelegate.persistentContainer.viewContext
     guard let entityDescription = NSEntityDescription.entity(forEntityName: "Article", in: moc) else { return }
-    
+
     let insertArticle = Article(entity: entityDescription, insertInto: moc)
     insertArticle.content = content
     insertArticle.title = title
@@ -55,7 +55,7 @@ func updateCoreDataContent(row: Int, content: String?, title: String?, imageData
             guard let results = try moc.fetch(request) as? [Article] else {
                 return
             }
-            
+
             if row >= results.count {
                 //add
                 guard let entityDescription = NSEntityDescription.entity(forEntityName: "Article", in: moc) else { return }
