@@ -33,7 +33,7 @@ class ShowImageViewController: UIViewController {
         self.tableViewShowImage.showsHorizontalScrollIndicator = false
         self.tableViewShowImage.showsVerticalScrollIndicator = false
         self.tableViewShowImage.separatorStyle = .none
-        
+
         //fetchDataResult
         fetchCoreDataResult()
     }
@@ -44,6 +44,28 @@ class ShowImageViewController: UIViewController {
 }
 
 extension ShowImageViewController: UITableViewDataSource, UITableViewDelegate {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+//    guard let addImageViewController = mainStoryboard.instantiateViewController(withIdentifier: AddImageViewController.identifier) as? AddImageViewController else { return }
+
+        guard let addImageViewController = segue.destination as? AddImageViewController else {
+            return
+        }
+        if let cell = sender as? ImageTableViewCell {
+            if let indexPath = tableViewShowImage.indexPath(for: cell) {
+                if let article = getSingleCoreDataArticle(for: indexPath.row) {
+                    if let title = article.title, let content = article.content, let imageData = article.imageData {
+
+                        addImageViewController.thisTitle = title
+                        addImageViewController.thisContent = content
+                        addImageViewController.thisImageData = imageData
+                    }
+                }
+            }
+        }
+
+    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
 
@@ -79,9 +101,13 @@ extension ShowImageViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let addImageViewController = mainStoryboard.instantiateViewController(withIdentifier: AddImageViewController.identifier) as? AddImageViewController else { return }
-        self.show(addImageViewController, sender: nil)
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
+        self.performSegue(withIdentifier: "addImageViewController", sender: self.tableViewShowImage.cellForRow(at: indexPath))
+
+//        guard let addImageViewController = mainStoryboard.instantiateViewController(withIdentifier: AddImageViewController.identifier) as? AddImageViewController else { return }
+//
+//        self.show(addImageViewController, sender: nil)
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

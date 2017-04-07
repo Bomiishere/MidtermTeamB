@@ -20,7 +20,7 @@ class ImageTableViewCell: UITableViewCell {
         // Initialization code
 
         self.imageShowing.layer.cornerRadius = 8
-//        self.imageShowing.clipsToBounds = true
+        self.imageShowing.clipsToBounds = true
 
     }
 
@@ -38,6 +38,7 @@ class ImageTableViewCell: UITableViewCell {
 
         if let imageData = article.imageData {
 
+            imageShowing.image = UIImage(data: imageData as Data)
         }
 
     }

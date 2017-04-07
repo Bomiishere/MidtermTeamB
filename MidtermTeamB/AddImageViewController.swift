@@ -22,6 +22,10 @@ class AddImageViewController: UIViewController {
     static let identifier: String = "AddImageViewController"
     let imagePickerController = UIImagePickerController()
 
+    var thisTitle = ""
+    var thisContent = ""
+    var thisImageData: NSData?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -36,6 +40,12 @@ class AddImageViewController: UIViewController {
         // 要Set title , 如果沒有東西是 Save , 如果有是 Update
         self.buttonSend.layer.cornerRadius = 22
         self.buttonSend.clipsToBounds = true
+
+        if let imageData = thisImageData {
+            self.buttonSelectImage.setImage(UIImage(data: imageData as Data), for: .normal)
+        }
+        self.textFieldTitle.text = thisTitle
+        self.textViewContent.text = thisContent
 
         self.buttonSelectImage.addTarget(self, action: #selector(selectImage), for: .touchUpInside)
         self.buttonDismiss.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -71,7 +81,14 @@ class AddImageViewController: UIViewController {
     }
 
     func sendPost() {
-        print("Send")
+
+        guard let imageData = UIImageJPEGRepresentation(self.buttonSelectImage.image(for: UIControlState.normal)!, 1 ) else {
+            return
+        }
+
+        addCoreDataArticle(content: self.textViewContent.text, title: self.textFieldTitle.text, imageData: imageData as NSData?)
+        appDelegate.saveContext()
+
         dismiss(animated: true, completion: nil)
     }
 

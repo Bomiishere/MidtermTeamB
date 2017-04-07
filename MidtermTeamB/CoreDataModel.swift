@@ -87,7 +87,7 @@ func deleteData(for row: Int) {
 
     let moc = appDelegate.persistentContainer.viewContext
 
-    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Content")
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Article")
 
     do {
 
