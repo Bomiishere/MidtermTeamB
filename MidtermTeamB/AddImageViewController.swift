@@ -19,6 +19,7 @@ class AddImageViewController: UIViewController {
     @IBOutlet weak var textViewContent: UITextView!
     @IBOutlet weak var buttonSend: UIButton!
 
+    static let identifier: String = "AddImageViewController"
     let imagePickerController = UIImagePickerController()
 
     override func viewDidLoad() {
@@ -44,6 +45,16 @@ class AddImageViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addNotificationObserver()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeNotificationObserver()
+    }
+
     func selectImage() {
         print("Select photo")
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
@@ -66,6 +77,32 @@ class AddImageViewController: UIViewController {
 
     func didTapView(gesture: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+
+    func addNotificationObserver() {
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: nil) { (notification) in
+            self.keyboardWillShow(notification: notification)
+        }
+
+        NotificationCenter.default.addObserver(forName: .UIKeyboardWillHide, object: nil, queue: nil) { (notification) in
+            self.keyboardWillHide(notification: notification)
+        }
+    }
+
+    func removeNotificationObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    func keyboardWillShow(notification: Notification) {
+
+        guard let userInfo = notification.userInfo,
+            let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue )?.cgRectValue else { return }
+
+        self.mainScrollView.contentOffset.y = frame.height
+    }
+
+    func keyboardWillHide(notification: Notification) {
+        self.mainScrollView.contentOffset.y = 0
     }
 }
 

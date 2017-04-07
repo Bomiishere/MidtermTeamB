@@ -85,7 +85,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                         <color key="backgroundColor" red="0.26274509800000001" green="0.3411764706" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="375" id="28d-8t-Niw"/>
                                             <constraint firstAttribute="width" constant="375" id="PIn-dy-f8D"/>
                                             <constraint firstAttribute="width" secondItem="jms-fT-B5m" secondAttribute="height" multiplier="1:1" id="pAd-8c-ykl"/>
                                         </constraints>
@@ -161,10 +160,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GRr-iQ-SdP" firstAttribute="trailing" secondItem="mRX-tN-kqj" secondAttribute="trailingMargin" constant="16" id="8lp-WG-E2n"/>
-                            <constraint firstItem="BkQ-Cp-XiH" firstAttribute="top" secondItem="GRr-iQ-SdP" secondAttribute="bottom" id="jbW-zR-V4W"/>
-                            <constraint firstItem="GRr-iQ-SdP" firstAttribute="top" secondItem="CSn-xM-Nee" secondAttribute="bottom" constant="-20" id="xMA-P2-VxA"/>
-                            <constraint firstItem="GRr-iQ-SdP" firstAttribute="leading" secondItem="mRX-tN-kqj" secondAttribute="leadingMargin" constant="-16" id="z2l-iC-VR6"/>
+                            <constraint firstItem="GRr-iQ-SdP" firstAttribute="width" secondItem="mRX-tN-kqj" secondAttribute="width" id="7sT-90-gJc"/>
+                            <constraint firstItem="GRr-iQ-SdP" firstAttribute="centerY" secondItem="mRX-tN-kqj" secondAttribute="centerY" id="V9N-yY-AFo"/>
+                            <constraint firstItem="GRr-iQ-SdP" firstAttribute="height" secondItem="mRX-tN-kqj" secondAttribute="height" id="fwA-I4-IgT"/>
+                            <constraint firstItem="GRr-iQ-SdP" firstAttribute="centerX" secondItem="mRX-tN-kqj" secondAttribute="centerX" id="sU9-t5-McF"/>
                         </constraints>
                     </view>
                     <connections>
